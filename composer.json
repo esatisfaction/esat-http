@@ -1,10 +1,10 @@
 {
-    "name": "esat/guzzle-http-adapter",
-    "description": "Http Adapter for Guzzle Client",
+    "name": "esat/http",
+    "description": "Http Library for Esat",
     "license": "MIT",
     "support": {
-        "source": "https://bitbucket.org/esatisfaction/guzzle-http-adapter",
-        "issues": "https://bitbucket.org/esatisfaction/guzzle-http-adapter/issues"
+        "source": "https://bitbucket.org/esatisfaction/http",
+        "issues": "https://bitbucket.org/esatisfaction/http/issues"
     },
     "authors": [
         {
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "HttpAdapter\\": "src"
+            "Esat\\Http\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "HttpAdapter\\": "tests"
+            "Esat\\Http\\": "tests"
         }
     },
     "extra": {
