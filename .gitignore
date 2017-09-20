@@ -1,0 +1,12 @@
+# Composer files
+composer.phar
+composer.lock
+vendor
+
+# OS Helper files
+.DS_Store
+.php_cs.cache
+.hg
+
+# IDE-relative files and folders
+.idea

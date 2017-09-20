@@ -1,0 +1,39 @@
+{
+    "name": "esat/guzzle-http-adapter",
+    "description": "Http Adapter for Guzzle Client",
+    "license": "MIT",
+    "support": {
+        "source": "https://bitbucket.org/esatisfaction/guzzle-http-adapter",
+        "issues": "https://bitbucket.org/esatisfaction/guzzle-http-adapter/issues"
+    },
+    "authors": [
+        {
+            "name": "e-satisfaction Developers",
+            "email": "tech@e-satisfaction.com",
+            "homepage": "https://tech.e-satisfaction.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "guzzlehttp/guzzle": "^6.0",
+        "panda/helpers": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "HttpAdapter\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HttpAdapter\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
