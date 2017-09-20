@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Guzzle Http Client Adapter.
+ * This file is part of the Esat Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HttpAdapter;
+namespace Esat\Http;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
@@ -19,7 +19,7 @@ use Psr\Http\Message\UriInterface;
 
 /**
  * Class HttpClient
- * @package HttpAdapter
+ * @package Esat\Http
  */
 class HttpClient
 {
