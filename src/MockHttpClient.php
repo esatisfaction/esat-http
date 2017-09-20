@@ -1,6 +1,15 @@
 <?php
 
-namespace HttpAdapter;
+/*
+ * This file is part of the Esat Http Package.
+ *
+ * (c) e-satisfaction Developers <tech@e-satisfaction.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Esat\Http;
 
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
