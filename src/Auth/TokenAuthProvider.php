@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat SDK Package.
+ * This file is part of the Esat Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
