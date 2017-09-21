@@ -38,7 +38,7 @@ class HttpClient
     /**
      * @var array
      */
-    protected $currentOptions;
+    protected $currentOptions = [];
 
     /**
      * @var ResponseInterface
@@ -85,7 +85,7 @@ class HttpClient
      *
      * @return Request
      */
-    protected function buildRequest($method, $uri, array $headers = [], $body = null, $version = '1.1')
+    public function buildRequest($method, $uri, array $headers = [], $body = null, $version = '1.1')
     {
         return $this->currentRequest = new Request($method, $uri, $headers, $body, $version);
     }
@@ -98,7 +98,7 @@ class HttpClient
      * @return array
      * @throws InvalidArgumentException
      */
-    protected function buildOptions($method, $parameters = [], $multipart = [])
+    public function buildOptions($method, $parameters = [], $multipart = [])
     {
         // Set options
         if (in_array(strtoupper($method), ['POST', 'PUT', 'PATCH', 'DELETE'])) {
@@ -118,6 +118,14 @@ class HttpClient
     }
 
     /**
+     * Clear current options array.
+     */
+    public function clearOptions()
+    {
+        $this->currentOptions = [];
+    }
+
+    /**
      * @param array $multipart
      *
      * @return $this
@@ -125,7 +133,7 @@ class HttpClient
      */
     public function setMultipart($multipart)
     {
-        $this->setOptions('multipart', $multipart);
+        $this->setOption('multipart', $multipart);
 
         return $this;
     }
@@ -138,7 +146,7 @@ class HttpClient
      */
     public function setQuery($query)
     {
-        $this->setOptions('query', $query);
+        $this->setOption('query', $query);
 
         return $this;
     }
@@ -151,7 +159,7 @@ class HttpClient
      */
     public function setFormParameters($parameters)
     {
-        $this->setOptions('form_params', $parameters);
+        $this->setOption('form_params', $parameters);
 
         return $this;
     }
@@ -164,7 +172,7 @@ class HttpClient
      */
     public function setBody($body)
     {
-        $this->setOptions('body', $body);
+        $this->setOption('body', $body);
 
         return $this;
     }
@@ -177,7 +185,7 @@ class HttpClient
      */
     public function setJson($json)
     {
-        $this->setOptions('json', $json);
+        $this->setOption('json', $json);
 
         return $this;
     }
@@ -189,11 +197,22 @@ class HttpClient
      * @return $this
      * @throws InvalidArgumentException
      */
-    public function setOptions($key, $value)
+    public function setOption($key, $value)
     {
-        ArrayHelper::set($this->currentOptions, $key, $value, true);
+        $this->currentOptions = ArrayHelper::set($this->currentOptions, $key, $value, true);
 
         return $this;
+    }
+
+    /**
+     * @param string     $key
+     * @param mixed|null $default
+     *
+     * @return mixed
+     */
+    public function getOption($key, $default = null)
+    {
+        return ArrayHelper::get($this->currentOptions, $key, $default, true);
     }
 
     /**
