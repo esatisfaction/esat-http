@@ -13,6 +13,8 @@ namespace Esat\Http;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
+use Panda\Support\Helpers\ArrayHelper;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -60,6 +62,7 @@ class HttpClient
      * @param string              $version
      *
      * @return mixed|ResponseInterface
+     * @throws InvalidArgumentException
      */
     public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1')
     {
@@ -93,30 +96,104 @@ class HttpClient
      * @param array  $multipart
      *
      * @return array
+     * @throws InvalidArgumentException
      */
     protected function buildOptions($method, $parameters = [], $multipart = [])
     {
         // Set options
-        $options = [];
-        if (in_array(strtolower($method), ['post', 'put', 'patch', 'delete'])) {
+        if (in_array(strtoupper($method), ['POST', 'PUT', 'PATCH', 'DELETE'])) {
             if (!empty($multipart)) {
                 foreach ($parameters as $name => $value) {
                     $multipart[] = ['name' => $name, 'contents' => $value];
                 }
-                $options['multipart'] = $multipart;
-            } else {
-                $options['form_params'] = $parameters;
+                $this->setMultipart($multipart);
+            } else if (!empty($parameters)) {
+                $this->setFormParameters($parameters);
             }
         } else if (!empty($parameters)) {
-            $options['query'] = $parameters;
+            $this->setQuery($parameters);
         }
 
-        return $this->currentOptions = $options;
+        return $this->getCurrentOptions();
     }
 
-    protected function setOptions($key, $value)
+    /**
+     * @param array $multipart
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setMultipart($multipart)
     {
-        $this->currentOptions[$key] = $value;
+        $this->setOptions('multipart', $multipart);
+
+        return $this;
+    }
+
+    /**
+     * @param string|array $query
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setQuery($query)
+    {
+        $this->setOptions('query', $query);
+
+        return $this;
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setFormParameters($parameters)
+    {
+        $this->setOptions('form_params', $parameters);
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $body
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setBody($body)
+    {
+        $this->setOptions('body', $body);
+
+        return $this;
+    }
+
+    /**
+     * @param string $json
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setJson($json)
+    {
+        $this->setOptions('json', $json);
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setOptions($key, $value)
+    {
+        ArrayHelper::set($this->currentOptions, $key, $value, true);
+
+        return $this;
     }
 
     /**

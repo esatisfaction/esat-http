@@ -1,6 +1,6 @@
 {
     "name": "esat/http",
-    "description": "Http Library for Esat",
+    "description": "Http Package for Esat",
     "license": "MIT",
     "support": {
         "source": "https://bitbucket.org/esatisfaction/http",
@@ -10,7 +10,7 @@
         {
             "name": "e-satisfaction Developers",
             "email": "tech@e-satisfaction.com",
-            "homepage": "https://tech.e-satisfaction.com"
+            "homepage": "https://developers.e-satisfaction.com"
         }
     ],
     "require": {
