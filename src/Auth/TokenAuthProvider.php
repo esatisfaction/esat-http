@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Auth;
+namespace Esat\Http\Auth;
 
-use Esat\Http\Auth\AuthProviderInterface;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -41,7 +40,7 @@ class TokenAuthProvider implements AuthProviderInterface
      * @return RequestInterface|static
      * @throws \InvalidArgumentException
      */
-    public function setRequestAuth(RequestInterface $request)
+    public function setRequestAuth(RequestInterface &$request)
     {
         // Set request headers
         return $request = $request->withHeader('esat-auth', $this->getToken());

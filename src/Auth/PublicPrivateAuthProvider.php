@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Auth;
+namespace Esat\Http\Auth;
 
-use Esat\Http\Auth\AuthProviderInterface;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 
@@ -47,17 +46,16 @@ class PublicPrivateAuthProvider implements AuthProviderInterface
 
     /**
      * @param RequestInterface $request
-     * @param string           $method
+     * @param int              $time
      *
      * @return RequestInterface|static
      * @throws InvalidArgumentException
      */
-    public function setRequestAuth(RequestInterface $request, $method = 'GET')
+    public function setRequestAuth(RequestInterface &$request, $time = null)
     {
         // Generate hash
-        $time = time();
-        $method = strtoupper($method);
-        $hash = base64_encode(hash_hmac('sha256', $this->getPublicKey() . $time . $method, $this->getPrivateKey(), true));
+        $time = $time ?: time();
+        $hash = base64_encode(hash_hmac('sha256', $this->getPublicKey() . $time . $request->getMethod(), $this->getPrivateKey(), true));
 
         // Set request headers
         $request = $request->withHeader('X-Public', $this->getPublicKey())

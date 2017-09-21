@@ -22,7 +22,7 @@ interface AuthProviderInterface
     /**
      * @param RequestInterface $request
      *
-     * @return RequestInterface
+     * @return RequestInterface The new request built with authentication.
      */
-    public function setRequestAuth(RequestInterface $request);
+    public function setRequestAuth(RequestInterface &$request);
 }
