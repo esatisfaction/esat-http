@@ -52,4 +52,24 @@ class AuthClient extends HttpClient
         // Set request authentication
         return $this->authProvider->setRequestAuth($this->getCurrentRequest());
     }
+
+    /**
+     * @return AuthProviderInterface
+     */
+    public function getAuthProvider()
+    {
+        return $this->authProvider;
+    }
+
+    /**
+     * @param AuthProviderInterface $authProvider
+     *
+     * @return $this
+     */
+    public function setAuthProvider(AuthProviderInterface $authProvider)
+    {
+        $this->authProvider = $authProvider;
+
+        return $this;
+    }
 }
