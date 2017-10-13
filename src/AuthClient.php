@@ -50,7 +50,7 @@ class AuthClient extends HttpClient
         parent::buildRequest($method, $uri, $headers, $body, $version);
 
         // Set request authentication
-        return $this->authProvider->setRequestAuth($this->getCurrentRequest());
+        return $this->authProvider->setRequestAuth($this->currentRequest);
     }
 
     /**
