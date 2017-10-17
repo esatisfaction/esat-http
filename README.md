@@ -1,3 +1,3 @@
-# Guzzle Http Adapter #
+# Esat Http Package #
 
-Simplified Http Adapter for the Guzzle Http Client
+Esat Http Package for handling all http request from php
