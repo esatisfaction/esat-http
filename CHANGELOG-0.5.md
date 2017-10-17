@@ -7,6 +7,9 @@ in all versions (major and minor)
 To get the diff for a specific change, go to https://bitbucket.org/esatisfaction/esat-sdk-web-php/commits/XXX where
 XXX is the change hash
 
+* 0.5.6 (2017-10-17)
+  * Extend HttpClientInterface with some extra methods
+  * Create separate AbstractHttpClient
 * 0.5.5 (2017-10-17)
   * Create HttpClientInterface
   * Update HttpClient to implement HttpClientInterface
