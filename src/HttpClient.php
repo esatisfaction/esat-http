@@ -23,7 +23,7 @@ use Psr\Http\Message\UriInterface;
  * Class HttpClient
  * @package Esat\Http
  */
-class HttpClient
+class HttpClient implements HttpClientInterface
 {
     /**
      * @var Client
