@@ -12,6 +12,7 @@
 namespace Esat\Http;
 
 use GuzzleHttp\Psr7\Request;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -65,4 +66,19 @@ interface HttpClientInterface
      * @return mixed
      */
     public function getOption($key, $default = null);
+
+    /**
+     * @return RequestInterface
+     */
+    public function getCurrentRequest();
+
+    /**
+     * @return array
+     */
+    public function getCurrentOptions();
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getCurrentResponse();
 }
