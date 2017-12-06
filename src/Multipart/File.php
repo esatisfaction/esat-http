@@ -22,22 +22,22 @@ class File extends BaseModel
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $filename;
+    protected $filename;
 
     /**
      * @var mixed
      */
-    private $contents;
+    protected $contents;
 
     /**
      * @var array
      */
-    private $headers;
+    protected $headers;
 
     /**
      * @return string
