@@ -29,17 +29,18 @@ class HttpClient extends AbstractHttpClient implements HttpClientInterface
      * @param array               $parameters
      * @param array               $multipart
      * @param string              $version
+     * @param bool                $clearOptions
      *
      * @return mixed|ResponseInterface
      * @throws InvalidArgumentException
      */
-    public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1')
+    public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1', $clearOptions = true)
     {
         // Build request
         $this->buildRequest($method, $uri, $headers, null, $version);
 
         // Build options
-        $this->buildOptions($method, $parameters, $multipart);
+        $this->buildOptions($method, $parameters, $multipart, $clearOptions);
 
         // Send request
         return $this->currentResponse = $this->guzzleClient->send($this->getCurrentRequest(), $this->getCurrentOptions());
@@ -63,12 +64,18 @@ class HttpClient extends AbstractHttpClient implements HttpClientInterface
      * @param string $method
      * @param array  $parameters
      * @param array  $multipart
+     * @param bool   $clear
      *
      * @return array
      * @throws InvalidArgumentException
      */
-    public function buildOptions($method, $parameters = [], $multipart = [])
+    public function buildOptions($method, $parameters = [], $multipart = [], $clear = true)
     {
+        // Clear options
+        if ($clear) {
+            $this->clearOptions();
+        }
+
         // Set options
         if (in_array(strtoupper($method), ['POST', 'PUT', 'PATCH', 'DELETE'])) {
             if (!empty($multipart)) {
