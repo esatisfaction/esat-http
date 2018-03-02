@@ -79,6 +79,7 @@ abstract class BaseModel
      * @param int $filter It can be configured using the ReflectionProperty constants
      *
      * @return array
+     * @throws \ReflectionException
      */
     public function toArray($filter = ReflectionProperty::IS_PROTECTED)
     {
