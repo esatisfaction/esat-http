@@ -46,7 +46,9 @@ abstract class AbstractHttpClient implements HttpClientInterface
     protected $currentResponse;
 
     /**
-     * HttpClient constructor.
+     * AbstractHttpClient constructor.
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct()
     {

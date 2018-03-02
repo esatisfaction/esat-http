@@ -28,13 +28,13 @@ class MockHttpClient extends HttpClient
     /**
      * {@inheritdoc}
      */
-    public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1')
+    public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1', $clearOptions = true)
     {
         // Build request
         $this->buildRequest($method, $uri, $headers, null, $version);
 
         // Build options
-        $this->buildOptions($method, $parameters, $multipart);
+        $this->buildOptions($method, $parameters, $multipart, $clearOptions);
 
         // Return mock response
         return $this->getMockResponse();

@@ -28,6 +28,8 @@ class AuthClient extends HttpClient
      * AuthClient constructor.
      *
      * @param AuthProviderInterface $authProvider
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(AuthProviderInterface $authProvider)
     {
