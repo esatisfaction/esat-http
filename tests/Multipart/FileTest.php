@@ -36,6 +36,7 @@ class FileTest extends Base_TestCase
 
     /**
      * Test setting the model properties and converting to array
+     * @throws \ReflectionException
      */
     public function testFile()
     {

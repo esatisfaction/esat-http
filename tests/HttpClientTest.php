@@ -24,6 +24,7 @@ class HttpClientTest extends Http_TestCase
 
     /**
      * {@inheritdoc}
+     * @throws \InvalidArgumentException
      */
     public function setUp()
     {

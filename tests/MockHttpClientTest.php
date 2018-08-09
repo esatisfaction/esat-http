@@ -34,6 +34,9 @@ class MockHttpClientTest extends Http_TestCase
 
     /**
      * @covers \Esat\Http\MockHttpClient::send
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \InvalidArgumentException
      */
     public function testSend()
     {
