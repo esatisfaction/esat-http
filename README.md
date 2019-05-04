@@ -32,3 +32,13 @@ If you do not wish to use Composer, you can download the [latest release](https:
 ```php
 require_once('/path/to/esatisfaction-http/init.php');
 ```
+
+## Dependencies
+
+This library require the following extensions and packages in order to work properly:
+
+- [`guzzlehttp/guzzle`](https://packagist.org/packages/guzzlehttp/guzzle)
+- [`panda/helpers`](https://packagist.org/packages/panda/helpers)
+
+If you use Composer, these dependencies should be handled automatically.
+If you install manually, you'll want to make sure that these extensions are available and loaded.
