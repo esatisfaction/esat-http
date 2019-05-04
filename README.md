@@ -1,6 +1,6 @@
 # e-satisfaction Http Package
 
-[![Build Status](https://travis-ci.org/esatisfaction/esat-http.svg?branch=master)](https://travis-ci.org/esatisfaction/esat-http)
+[![Build Status](https://travis-ci.org/esatisfaction/esat-http.svg?branch=v1.0)](https://travis-ci.org/esatisfaction/esat-http)
 [![Latest Stable Version](https://poser.pugx.org/esatisfaction/esat-http/v/stable?format=flat-square)](https://packagist.org/packages/esatisfaction/esat-http)
 [![Total Downloads](https://poser.pugx.org/esatisfaction/esat-http/downloads?format=flat-square)](https://packagist.org/packages/esatisfaction/esat-http)
 [![License](https://poser.pugx.org/esatisfaction/esat-http/license?format=flat-square)](https://packagist.org/packages/esatisfaction/esat-http)
