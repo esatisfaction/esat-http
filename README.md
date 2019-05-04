@@ -1,9 +1,9 @@
 # e-satisfaction Http Package
 
 [![Build Status](https://travis-ci.org/esatisfaction/esat-http.svg?branch=v1.0)](https://travis-ci.org/esatisfaction/esat-http)
-[![Latest Stable Version](https://poser.pugx.org/esatisfaction/esat-http/v/stable?format=flat-square)](https://packagist.org/packages/esatisfaction/esat-http)
-[![Total Downloads](https://poser.pugx.org/esatisfaction/esat-http/downloads?format=flat-square)](https://packagist.org/packages/esatisfaction/esat-http)
-[![License](https://poser.pugx.org/esatisfaction/esat-http/license?format=flat-square)](https://packagist.org/packages/esatisfaction/esat-http)
+[![Latest Stable Version](https://poser.pugx.org/esatisfaction/http/v/stable)](https://packagist.org/packages/esatisfaction/http)
+[![Total Downloads](https://poser.pugx.org/esatisfaction/http/downloads)](https://packagist.org/packages/esatisfaction/http)
+[![License](https://poser.pugx.org/esatisfaction/http/license)](https://packagist.org/packages/esatisfaction/http)
 
 e-satisfaction Http Package for handling all http request from php.
 
