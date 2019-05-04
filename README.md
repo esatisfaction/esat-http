@@ -9,7 +9,7 @@ e-satisfaction Http Package for handling all http request from php.
 
 ## Requirements
 
-PHP 7.0.0 and later.
+PHP 7.1.0 and later.
 
 ## Composer
 
