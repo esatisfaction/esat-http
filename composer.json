@@ -1,0 +1,38 @@
+{
+    "name": "esatisfaction/http",
+    "description": "Http Package for e-satisfaction",
+    "license": "MIT",
+    "support": {
+        "source": "https://github.com/esatisfaction/esat-http",
+        "issues": "https://github.com/esatisfaction/esat-http/issues"
+    },
+    "authors": [
+        {
+            "name": "e-satisfaction Developers",
+            "email": "tech@e-satisfaction.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "guzzlehttp/guzzle": "^6.0",
+        "panda/helpers": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Esat\\Http\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Esat\\Http\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
