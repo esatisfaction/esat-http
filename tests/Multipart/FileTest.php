@@ -12,6 +12,7 @@
 namespace Esat\Http\Multipart;
 
 use Esat\Http\Base_TestCase;
+use ReflectionException;
 
 /**
  * Class FileTest
@@ -36,7 +37,7 @@ class FileTest extends Base_TestCase
 
     /**
      * Test setting the model properties and converting to array
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function testFile()
     {

@@ -11,6 +11,8 @@
 
 namespace Esat\Http;
 
+use Esat\Http\Clients\MockHttpClient;
+use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -26,7 +28,7 @@ class Http_TestCase extends Base_TestCase
 
     /**
      * {@inheritdoc}
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setUp()
     {
