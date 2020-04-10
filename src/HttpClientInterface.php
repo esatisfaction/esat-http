@@ -11,6 +11,8 @@
 
 namespace Esat\Http;
 
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -30,6 +32,8 @@ interface HttpClientInterface
      * @param string $version
      *
      * @return mixed|ResponseInterface
+     * @throws ServerException
+     * @throws ClientException
      */
     public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1');
 

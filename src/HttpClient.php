@@ -33,6 +33,7 @@ class HttpClient extends AbstractHttpClient implements HttpClientInterface
      *
      * @return mixed|ResponseInterface
      * @throws InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1', $clearOptions = true)
     {
