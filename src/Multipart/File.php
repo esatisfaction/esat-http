@@ -11,7 +11,7 @@
 
 namespace Esat\Http\Multipart;
 
-use Esat\Http\Support\Model\BaseModel;
+use Esat\Model\Support\BaseModel;
 
 /**
  * Class File
