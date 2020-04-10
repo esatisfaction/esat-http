@@ -18,6 +18,7 @@ use Panda\Support\Helpers\ArrayHelper;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use ReflectionException;
+use RuntimeException;
 use Throwable;
 
 /**
@@ -89,20 +90,42 @@ abstract class ModelService extends BaseService
      * @param BaseModel         $model
      * @param string|null       $subField
      * @param bool              $clearModel
-     * @param bool              $saveResponse
      *
      * @return bool
      * @throws Exception
      */
-    protected function setModelFromResponse(ResponseInterface $response, &$model = null, $subField = null, $clearModel = false, $saveResponse = true)
+    protected function setModelFromResponse(ResponseInterface $response, &$model = null, $subField = null, $clearModel = false)
     {
         try {
             // Get response as array
-            $array = $this->getResponseAsArray($response, $saveResponse);
+            $array = $this->getResponseAsArray($response);
 
             return $this->setModelFromArray($array, $model, $subField, $clearModel);
         } catch (Throwable $ex) {
             throw new Exception('An error occurred while setting the model from the given response.', 0, $ex);
+        }
+    }
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return array
+     * @throws Exception
+     */
+    protected function getResponseAsArray(ResponseInterface $response)
+    {
+        try {
+            // Rewind stream to make sure that response contents are available for read
+            $response->getBody()->rewind();
+            $contents = $response->getBody()->getContents();
+
+            // Rewind the body again to allow future reads
+            $response->getBody()->rewind();
+
+            // Decode contents
+            return json_decode($contents, true);
+        } catch (RuntimeException $ex) {
+            throw new Exception('The given response does not have the proper format.', 0, $ex);
         }
     }
 

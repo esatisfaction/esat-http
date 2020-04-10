@@ -170,23 +170,11 @@ abstract class HttpService extends ModelService
      */
     protected function getResponseAsArray(ResponseInterface $response, $save = true)
     {
-        try {
-            if ($save) {
-                $this->setLastResponse($response);
-            }
-
-            // Rewind stream to make sure that response contents are available for read
-            $response->getBody()->rewind();
-            $contents = $response->getBody()->getContents();
-
-            // Rewind the body again to allow future reads
-            $response->getBody()->rewind();
-
-            // Decode contents
-            return json_decode($contents, true);
-        } catch (RuntimeException $ex) {
-            throw new Exception('The given response does not have the proper format.', 0, $ex);
+        if ($save) {
+            $this->setLastResponse($response);
         }
+
+        return parent::getResponseAsArray($response);
     }
 
     /**
