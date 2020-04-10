@@ -9,11 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
+
+use Esat\Http\Http_TestCase;
+use InvalidArgumentException;
 
 /**
  * Class HttpClientTest
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 class HttpClientTest extends Http_TestCase
 {
@@ -24,7 +27,7 @@ class HttpClientTest extends Http_TestCase
 
     /**
      * {@inheritdoc}
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setUp()
     {
@@ -61,7 +64,7 @@ class HttpClientTest extends Http_TestCase
      * @covers \Esat\Http\HttpClient::setJson
      * @covers \Esat\Http\HttpClient::buildOptions
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testBuildOptions()
     {

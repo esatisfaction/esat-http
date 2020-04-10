@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
 
 use GuzzleHttp\Psr7\Request;
 use InvalidArgumentException;
@@ -18,7 +18,7 @@ use Psr\Http\Message\UriInterface;
 
 /**
  * Class HttpClient
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 class HttpClient extends AbstractHttpClient implements HttpClientInterface
 {
@@ -32,8 +32,6 @@ class HttpClient extends AbstractHttpClient implements HttpClientInterface
      * @param bool                $clearOptions
      *
      * @return mixed|ResponseInterface
-     * @throws InvalidArgumentException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1', $clearOptions = true)
     {

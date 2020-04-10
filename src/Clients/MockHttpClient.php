@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
 
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class MockHttpClient
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 class MockHttpClient extends HttpClient
 {

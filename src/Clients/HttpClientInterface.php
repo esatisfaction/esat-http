@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
@@ -19,7 +19,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface HttpClientInterface
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 interface HttpClientInterface
 {
