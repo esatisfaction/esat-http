@@ -13,6 +13,7 @@ namespace Esat\Http\Auth;
 
 use Esat\Http\Http_TestCase;
 use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
 
 /**
  * Class MockAuthProviderTest
@@ -23,7 +24,7 @@ class MockAuthProviderTest extends Http_TestCase
     /**
      * @covers \Esat\Http\Auth\MockAuthProvider::setRequestAuth
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testSetRequestAuth()
     {

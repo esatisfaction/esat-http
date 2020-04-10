@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
 
 use Esat\Http\Auth\AuthProviderInterface;
+use InvalidArgumentException;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * Class AuthClient
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 class AuthClient extends HttpClient
 {
@@ -29,7 +31,7 @@ class AuthClient extends HttpClient
      *
      * @param AuthProviderInterface $authProvider
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct(AuthProviderInterface $authProvider)
     {
@@ -44,7 +46,7 @@ class AuthClient extends HttpClient
      * @param null   $body
      * @param string $version
      *
-     * @return \Psr\Http\Message\RequestInterface
+     * @return RequestInterface
      */
     public function buildRequest($method, $uri, array $headers = [], $body = null, $version = '1.1')
     {

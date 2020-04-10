@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
@@ -21,7 +21,7 @@ use Psr\Http\Message\UriInterface;
 
 /**
  * Class AbstractHttpClient
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 abstract class AbstractHttpClient implements HttpClientInterface
 {

@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
+
+use Esat\Http\Http_TestCase;
 
 /**
  * Class MockHttpClientTest
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 class MockHttpClientTest extends Http_TestCase
 {
@@ -34,6 +36,7 @@ class MockHttpClientTest extends Http_TestCase
 
     /**
      * @covers \Esat\Http\MockHttpClient::send
+     *
      */
     public function testSend()
     {

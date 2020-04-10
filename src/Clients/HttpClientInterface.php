@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Esat\Http;
+namespace Esat\Http\Clients;
 
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface HttpClientInterface
- * @package Esat\Http
+ * @package Esat\Http\Clients
  */
 interface HttpClientInterface
 {
@@ -30,6 +32,8 @@ interface HttpClientInterface
      * @param string $version
      *
      * @return mixed|ResponseInterface
+     * @throws ServerException
+     * @throws ClientException
      */
     public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1');
 
