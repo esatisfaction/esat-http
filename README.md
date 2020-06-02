@@ -1,12 +1,40 @@
-# e-satisfaction Http Package
+# e-satisfaction Http Package #
 
 e-satisfaction Http Package for handling all http request from php.
 
-## Requirements
+[![codecov](https://codecov.io/bb/esatisfaction/esat-http/branch/v1.0/graph/badge.svg?token=743W8UUK3E)](https://codecov.io/bb/esatisfaction/esat-http)
+
+### Setup Repository ###
+
+#### Required Extensions ####
+
+Before installing all the necessary packages, you should enable the `ext-pcov` extension in your machine.
+
+You can find the extension here: [https://pecl.php.net/package/pcov](https://pecl.php.net/package/pcov).
+
+#### Composer #### 
+
+To setup this repository, you should install all composer dependencies:
+
+```bash
+composer install
+```
+
+### Running tests with Coverage ###
+
+Before running any tests with coverage, you should enable the pcov extension to be used.
+
+Make XDebug drive use PCOV instead by executing the following:
+
+```bash
+vendor/bin/pcov clobber
+```
+
+## Requirements ##
 
 PHP 7.1.0 and later.
 
-## Composer
+## Composer ##
 
 You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
@@ -20,7 +48,7 @@ To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-ba
 require_once('vendor/autoload.php');
 ```
 
-## Manual Installation
+## Manual Installation ##
 
 If you do not wish to use Composer, you can download the [latest release](https://github.com/esatisfaction/esat-http/releases). Then, to use the bindings, include the `init.php` file.
 
@@ -28,7 +56,7 @@ If you do not wish to use Composer, you can download the [latest release](https:
 require_once('/path/to/esatisfaction-http/init.php');
 ```
 
-## Dependencies
+## Dependencies ##
 
 This library require the following extensions and packages in order to work properly:
 
