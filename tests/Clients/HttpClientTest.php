@@ -37,7 +37,7 @@ class HttpClientTest extends Http_TestCase
     }
 
     /**
-     * @covers \Esat\Http\HttpClient::buildRequest
+     * @covers \Esat\Http\Clients\HttpClient::buildRequest
      */
     public function testBuildRequest()
     {
@@ -58,11 +58,11 @@ class HttpClientTest extends Http_TestCase
     }
 
     /**
-     * @covers \Esat\Http\HttpClient::setQuery
-     * @covers \Esat\Http\HttpClient::setBody
-     * @covers \Esat\Http\HttpClient::setFormParameters
-     * @covers \Esat\Http\HttpClient::setJson
-     * @covers \Esat\Http\HttpClient::buildOptions
+     * @covers \Esat\Http\Clients\HttpClient::setQuery
+     * @covers \Esat\Http\Clients\HttpClient::setBody
+     * @covers \Esat\Http\Clients\HttpClient::setFormParameters
+     * @covers \Esat\Http\Clients\HttpClient::setJson
+     * @covers \Esat\Http\Clients\HttpClient::buildOptions
      *
      * @throws InvalidArgumentException
      */
