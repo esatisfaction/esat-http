@@ -6,3 +6,6 @@ vendor
 .DS_Store
 .php_cs.cache
 .hg
+
+# Code coverage reports
+coverage.xml

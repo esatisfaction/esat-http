@@ -35,7 +35,7 @@ class MockHttpClientTest extends Http_TestCase
     }
 
     /**
-     * @covers \Esat\Http\MockHttpClient::send
+     * @covers \Esat\Http\Clients\MockHttpClient::send
      *
      */
     public function testSend()
