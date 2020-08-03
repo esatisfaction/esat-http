@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -11,7 +11,7 @@
 
 namespace Esat\Http;
 
-use Esat\Model\Support\BaseModel;
+use Esat\Model\BaseModel;
 use Exception;
 use InvalidArgumentException;
 use Panda\Support\Helpers\ArrayHelper;
@@ -94,7 +94,7 @@ abstract class ModelService extends BaseService
      * @return bool
      * @throws Exception
      */
-    protected function setModelFromResponse(ResponseInterface $response, &$model = null, $subField = null, $clearModel = false)
+    public function setModelFromResponse(ResponseInterface $response, &$model = null, $subField = null, $clearModel = false)
     {
         try {
             // Get response as array
@@ -112,7 +112,7 @@ abstract class ModelService extends BaseService
      * @return array
      * @throws Exception
      */
-    protected function getResponseAsArray(ResponseInterface $response)
+    public function getResponseAsArray(ResponseInterface $response)
     {
         try {
             // Rewind stream to make sure that response contents are available for read
@@ -123,7 +123,12 @@ abstract class ModelService extends BaseService
             $response->getBody()->rewind();
 
             // Decode contents
-            return json_decode($contents, true);
+            $result = json_decode($contents, true);
+            if (is_null($result)) {
+                throw new RuntimeException('Json could not be converted to array.');
+            }
+
+            return $result;
         } catch (RuntimeException $ex) {
             throw new Exception('The given response does not have the proper format.', 0, $ex);
         }
@@ -138,7 +143,7 @@ abstract class ModelService extends BaseService
      * @return bool
      * @throws Exception
      */
-    protected function setModelFromArray(array $array, &$model = null, $subField = null, $clearModel = false)
+    public function setModelFromArray(array $array, &$model = null, $subField = null, $clearModel = false)
     {
         try {
             // Normalize model

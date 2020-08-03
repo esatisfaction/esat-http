@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -88,14 +88,15 @@ abstract class HttpService extends ModelService
      * @param array  $multipart
      *
      * @return ResponseInterface
+     * @throws InvalidArgumentException
      * @throws Exception
      */
-    protected function send($method, $uri, $headers = [], $parameters = [], $multipart = [])
+    public function send($method, $uri, $headers = [], $parameters = [], $multipart = [])
     {
         try {
             // Add domain and version to uri
             $serviceUri = $this->getApiUri($uri);
-            $key = md5(sprintf('%s:%s', $serviceUri, json_encode($parameters)));
+            $key = $this->getCacheKey($serviceUri, $parameters);
 
             // Check for cache
             if ($method == Request::METHOD_GET
@@ -141,7 +142,7 @@ abstract class HttpService extends ModelService
 
             // Return the normal response
             $this->setLastResponse($ex->getResponse());
-        } catch (RuntimeException $e) {
+        } catch (RuntimeException $ex) {
         }
 
         // Set response and return it
@@ -149,11 +150,22 @@ abstract class HttpService extends ModelService
     }
 
     /**
+     * @param string $serviceUri
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    public function getCacheKey($serviceUri, $parameters)
+    {
+        return md5(sprintf('%s:%s', $serviceUri, json_encode($parameters)));
+    }
+
+    /**
      * @param string $uri
      *
      * @return string
      */
-    protected function getApiUri($uri)
+    public function getApiUri($uri)
     {
         $baseUri = $this->getConnection()->getBaseUri();
         $version = $this->getConnection()->getVersion();
@@ -168,7 +180,7 @@ abstract class HttpService extends ModelService
      * @return array
      * @throws Exception
      */
-    protected function getResponseAsArray(ResponseInterface $response, $save = true)
+    public function getResponseAsArray(ResponseInterface $response, $save = true)
     {
         if ($save) {
             $this->setLastResponse($response);
@@ -216,6 +228,18 @@ abstract class HttpService extends ModelService
     }
 
     /**
+     * @param HttpClientInterface $httpClient
+     *
+     * @return $this
+     */
+    public function setHttpClient(HttpClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+
+        return $this;
+    }
+
+    /**
      * @return HttpClientInterface
      */
     public function getHttpClient()
@@ -256,20 +280,17 @@ abstract class HttpService extends ModelService
      * @param string $key
      *
      * @return ResponseInterface
+     * @throws InvalidArgumentException
      */
     public function getFromCache($key)
     {
-        try {
-            // Normalize cache key
-            $key = $this->normalizeCacheKey($key);
+        // Normalize cache key
+        $key = $this->normalizeCacheKey($key);
 
-            // Get response from cache
-            return $this->getResponseFromArray(self::getCache()->get($key, function () {
-                return [];
-            }));
-        } catch (InvalidArgumentException $exx) {
-            return null;
-        }
+        // Get response from cache
+        return $this->getResponseFromArray(self::getCache()->get($key, function () {
+            return [];
+        }));
     }
 
     /**
@@ -299,7 +320,6 @@ abstract class HttpService extends ModelService
             // Update cache
             self::getCache()->save($item);
         } catch (InvalidArgumentException $exx) {
-        } catch (RuntimeException $exx) {
         }
 
         return $this;
@@ -311,7 +331,7 @@ abstract class HttpService extends ModelService
      * @return array
      * @throws RuntimeException
      */
-    private function getResponseToArray($response)
+    private function getResponseToArray(ResponseInterface $response)
     {
         return [
             'status_code' => $response->getStatusCode(),

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -11,11 +11,13 @@
 
 namespace Esat\Http\Config;
 
-use Esat\Model\Support\SingletonModel;
+use Esat\Model\SingletonModel;
 
 /**
  * Class Connection
  * @package Esat\Http\Config
+ *
+ * @method static SingletonModel|Connection getInstance($model = [])
  */
 class Connection extends SingletonModel
 {
@@ -28,16 +30,6 @@ class Connection extends SingletonModel
      * @var string
      */
     protected $version;
-
-    /**
-     * @param array $model
-     *
-     * @return SingletonModel|Connection
-     */
-    public static function getInstance($model = [])
-    {
-        return parent::getInstance($model);
-    }
 
     /**
      * @return string

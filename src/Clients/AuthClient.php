@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -36,7 +36,7 @@ class AuthClient extends HttpClient
     public function __construct(AuthProviderInterface $authProvider)
     {
         parent::__construct();
-        $this->authProvider = $authProvider;
+        $this->setAuthProvider($authProvider);
     }
 
     /**

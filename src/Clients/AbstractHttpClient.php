@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -18,6 +18,7 @@ use Panda\Support\Helpers\ArrayHelper;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 /**
  * Class AbstractHttpClient
@@ -36,14 +37,14 @@ abstract class AbstractHttpClient implements HttpClientInterface
     protected $currentRequest;
 
     /**
-     * @var array
-     */
-    protected $currentOptions = [];
-
-    /**
      * @var ResponseInterface
      */
     protected $currentResponse;
+
+    /**
+     * @var array
+     */
+    protected $currentOptions = [];
 
     /**
      * AbstractHttpClient constructor.
@@ -83,14 +84,25 @@ abstract class AbstractHttpClient implements HttpClientInterface
      * @param string $method
      * @param array  $parameters
      * @param array  $multipart
+     * @param bool   $clear
      *
      * @return array
      * @throws InvalidArgumentException
      */
-    public function buildOptions($method, $parameters = [], $multipart = [])
+    public function buildOptions($method, $parameters = [], $multipart = [], $clear = true)
     {
+        // Clear options
+        if ($clear) {
+            $this->clearOptions();
+        }
+
         // Set options
-        if (in_array(strtoupper($method), ['POST', 'PUT', 'PATCH', 'DELETE'])) {
+        if (in_array(strtoupper($method), [
+            SymfonyRequest::METHOD_POST,
+            SymfonyRequest::METHOD_PUT,
+            SymfonyRequest::METHOD_PATCH,
+            SymfonyRequest::METHOD_DELETE,
+        ])) {
             if (!empty($multipart)) {
                 foreach ($parameters as $name => $value) {
                     $multipart[] = ['name' => $name, 'contents' => $value];
@@ -180,6 +192,86 @@ abstract class AbstractHttpClient implements HttpClientInterface
     }
 
     /**
+     * @param Client $guzzleClient
+     *
+     * @return $this
+     */
+    public function setGuzzleClient(Client $guzzleClient)
+    {
+        $this->guzzleClient = $guzzleClient;
+
+        return $this;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getGuzzleClient()
+    {
+        return $this->guzzleClient;
+    }
+
+    /**
+     * @param RequestInterface $currentRequest
+     *
+     * @return $this
+     */
+    public function setCurrentRequest(RequestInterface $currentRequest)
+    {
+        $this->currentRequest = $currentRequest;
+
+        return $this;
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function getCurrentRequest()
+    {
+        return $this->currentRequest;
+    }
+
+    /**
+     * @param ResponseInterface $currentResponse
+     *
+     * @return $this
+     */
+    public function setCurrentResponse(ResponseInterface $currentResponse)
+    {
+        $this->currentResponse = $currentResponse;
+
+        return $this;
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getCurrentResponse()
+    {
+        return $this->currentResponse;
+    }
+
+    /**
+     * @param array $currentOptions
+     *
+     * @return $this
+     */
+    public function setCurrentOptions(array $currentOptions)
+    {
+        $this->currentOptions = $currentOptions;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCurrentOptions()
+    {
+        return $this->currentOptions;
+    }
+
+    /**
      * @param string $key
      * @param mixed  $value
      *
@@ -201,38 +293,6 @@ abstract class AbstractHttpClient implements HttpClientInterface
      */
     public function getOption($key, $default = null)
     {
-        return ArrayHelper::get($this->currentOptions, $key, $default, true);
-    }
-
-    /**
-     * @return Client
-     */
-    public function getGuzzleClient()
-    {
-        return $this->guzzleClient;
-    }
-
-    /**
-     * @return RequestInterface
-     */
-    public function getCurrentRequest()
-    {
-        return $this->currentRequest;
-    }
-
-    /**
-     * @return array
-     */
-    public function getCurrentOptions()
-    {
-        return $this->currentOptions;
-    }
-
-    /**
-     * @return ResponseInterface
-     */
-    public function getCurrentResponse()
-    {
-        return $this->currentResponse;
+        return ArrayHelper::get($this->getCurrentOptions(), $key, $default, true);
     }
 }
