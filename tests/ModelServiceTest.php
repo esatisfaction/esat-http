@@ -62,7 +62,6 @@ class ModelServiceTest extends Http_TestCase
         $this->assertNotNull($client->getLogger());
         $this->assertEquals($logger, $client->getLogger());
         $this->assertTrue($client->getLogger() instanceof LoggerInterface);
-
     }
 
     /**
