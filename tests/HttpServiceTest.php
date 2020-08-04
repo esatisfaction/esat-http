@@ -33,11 +33,6 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 class HttpServiceTest extends Base_TestCase
 {
     /**
-     * @var MockHttpClient
-     */
-    protected $mockHttpClient;
-
-    /**
      * @var HttpService
      */
     protected $httpService;
