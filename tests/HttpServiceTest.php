@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the e-satisfaction Http Package.
+ * This file is part of the e-satisfaction.com Http Package.
  *
- * (c) e-satisfaction Developers <tech@e-satisfaction.com>
+ * (c) e-satisfaction.com Developers <tech@e-satisfaction.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.

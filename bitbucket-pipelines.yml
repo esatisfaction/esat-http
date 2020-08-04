@@ -20,6 +20,14 @@ pipelines:
             - vendor/bin/pcov clobber
             - vendor/bin/phpunit tests --teamcity --coverage-clover=coverage.xml
             - bash <(curl -s https://codecov.io/bash)
+          condition:
+            changesets:
+              includePaths:
+                - "src/**"
+                - "tests/**"
+                - "phpunit.xml"
+                - "composer.json"
+                - "composer.lock"
   branches:
     v*:
       - step:
