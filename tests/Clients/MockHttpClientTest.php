@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -12,6 +12,7 @@
 namespace Esat\Http\Clients;
 
 use Esat\Http\Http_TestCase;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * Class MockHttpClientTest
@@ -32,6 +33,17 @@ class MockHttpClientTest extends Http_TestCase
         parent::setUp();
 
         $this->client = new MockHttpClient();
+    }
+
+    /**
+     * @covers \Esat\Http\Clients\MockHttpClient::setMockResponse
+     * @covers \Esat\Http\Clients\MockHttpClient::getMockResponse
+     */
+    public function testGetterAndSetter()
+    {
+        $response = new Response();
+        $this->assertTrue($this->client->setMockResponse($response) instanceof MockHttpClient);
+        $this->assertEquals($response, $this->client->getMockResponse());
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -22,6 +22,7 @@ use InvalidArgumentException;
 class MockAuthProviderTest extends Http_TestCase
 {
     /**
+     * @covers \Esat\Http\Auth\MockAuthProvider::__construct
      * @covers \Esat\Http\Auth\MockAuthProvider::setRequestAuth
      *
      * @throws InvalidArgumentException

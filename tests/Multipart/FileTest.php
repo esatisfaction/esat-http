@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -11,8 +11,9 @@
 
 namespace Esat\Http\Multipart;
 
+use Esat\Helpers\UuidHelper;
 use Esat\Http\Base_TestCase;
-use ReflectionException;
+use Exception;
 
 /**
  * Class FileTest
@@ -21,41 +22,42 @@ use ReflectionException;
 class FileTest extends Base_TestCase
 {
     /**
-     * @var File
+     * @covers \Esat\Http\Multipart\File::setName
+     * @covers \Esat\Http\Multipart\File::getName
+     * @covers \Esat\Http\Multipart\File::setFilename
+     * @covers \Esat\Http\Multipart\File::getFilename
+     * @covers \Esat\Http\Multipart\File::setContents
+     * @covers \Esat\Http\Multipart\File::getContents
+     * @covers \Esat\Http\Multipart\File::setHeaders
+     * @covers \Esat\Http\Multipart\File::getHeaders
+     *
+     * @throws Exception
      */
-    private $file;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
+    public function testGetterAndSetter()
     {
-        parent::setUp();
+        // Get instance
+        $model = new File();
 
-        $this->file = new File();
-    }
+        // Name
+        $value = UuidHelper::create();
+        $this->assertTrue($model->setName($value) instanceof File);
+        $this->assertEquals($value, $model->getName());
 
-    /**
-     * Test setting the model properties and converting to array
-     * @throws ReflectionException
-     */
-    public function testFile()
-    {
-        // Create parameters
-        $name = 'name';
-        $fileName = 'file_name';
-        $fileContents = 'file_contents';
+        // File Name
+        $value = UuidHelper::create();
+        $this->assertTrue($model->setFilename($value) instanceof File);
+        $this->assertEquals($value, $model->getFilename());
 
-        // Set file parameters
-        $this->file
-            ->setName($name)
-            ->setFilename($fileName)
-            ->setContents($fileContents);
+        // Contents
+        $value = UuidHelper::create();
+        $this->assertTrue($model->setContents($value) instanceof File);
+        $this->assertEquals($value, $model->getContents());
 
-        // Assert
-        $array = $this->file->toArray();
-        $this->assertEquals($name, $array['name']);
-        $this->assertEquals($fileName, $array['filename']);
-        $this->assertEquals($fileContents, $array['contents']);
+        // Headers
+        $value = [
+            'name' => 'value',
+        ];
+        $this->assertTrue($model->setHeaders($value) instanceof File);
+        $this->assertEquals($value, $model->getHeaders());
     }
 }

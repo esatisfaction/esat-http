@@ -6,15 +6,39 @@
 image: php:7.3.12
 
 pipelines:
-  default:
-    - step:
-        caches:
-          - composer
-        script:
-          - apt-get update && apt-get install -y unzip openssl zlib1g-dev git ssh
-          - pecl install pcov && docker-php-ext-enable pcov
-          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-          - composer install
-          - vendor/bin/pcov clobber
-          - vendor/bin/phpunit tests --teamcity --coverage-clover=coverage.xml
-          - bash <(curl -s https://codecov.io/bash)
+  pull-requests:
+    '**':
+      - step:
+          name: Run all test and update Code Coverage
+          caches:
+            - composer
+          script:
+            - apt-get update && apt-get install -y unzip openssl zlib1g-dev git ssh
+            - pecl install pcov && docker-php-ext-enable pcov
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            - composer install
+            - vendor/bin/pcov clobber
+            - vendor/bin/phpunit tests --teamcity --coverage-clover=coverage.xml
+            - bash <(curl -s https://codecov.io/bash)
+  branches:
+    v*:
+      - step:
+          name: Create Tag
+          deployment: production
+          script:
+            # Setup repo
+            - apt-get update && apt-get install -y unzip openssl zlib1g-dev git ssh
+            - pecl install pcov && docker-php-ext-enable pcov
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            - composer install
+            # Run all tests
+            - vendor/bin/pcov clobber
+            - vendor/bin/phpunit tests --teamcity --coverage-clover=coverage.xml
+            - bash <(curl -s https://codecov.io/bash)
+            # Create tag
+            - BRANCH_NAME=$BITBUCKET_BRANCH
+            - PATCH=$(date +%Y%m%d.%H%M%S)
+            - TAG_NAME="$BRANCH_NAME.$PATCH"
+            - git tag $TAG_NAME
+            - git remote set-url origin git@bitbucket.org:esatisfaction/esat-http.git
+            - git push origin $TAG_NAME

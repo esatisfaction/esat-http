@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -11,7 +11,7 @@
 
 namespace Esat\Http\Multipart;
 
-use Esat\Model\Support\BaseModel;
+use Esat\Model\BaseModel;
 
 /**
  * Class File

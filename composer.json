@@ -16,11 +16,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:esatisfaction/esat-model.git"
+            "url": "git@bitbucket.org:esatisfaction/esat-helpers-php.git"
         },
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:esatisfaction/esat-helpers-php.git"
+            "url": "git@bitbucket.org:esatisfaction/esat-model-base.git"
         }
     ],
     "require": {
@@ -30,7 +30,7 @@
         "symfony/http-foundation": "^3.3",
         "guzzlehttp/guzzle": "^6.0",
         "esat/helpers": "^1.0",
-        "esat/model": "^1.0"
+        "esat/model-base": "^1.0"
     },
     "require-dev": {
         "ext-pcov": "^1.0",

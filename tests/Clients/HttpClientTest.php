@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Esat Http Package.
+ * This file is part of the e-satisfaction Http Package.
  *
  * (c) e-satisfaction Developers <tech@e-satisfaction.com>
  *
@@ -12,7 +12,12 @@
 namespace Esat\Http\Clients;
 
 use Esat\Http\Http_TestCase;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use InvalidArgumentException;
+use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 /**
  * Class HttpClientTest
@@ -41,15 +46,13 @@ class HttpClientTest extends Http_TestCase
      */
     public function testBuildRequest()
     {
-        $method = 'GET';
+        $method = Request::METHOD_GET;
         $uri = '/path/to/resource';
         $headers = [
             'test_h1' => 'test_v1',
             'test_h2' => 'test_v2',
         ];
         $this->client->buildRequest($method, $uri, $headers);
-
-        // Assert
         $this->assertEquals($method, $this->client->getCurrentRequest()->getMethod());
         $this->assertEquals($uri, $this->client->getCurrentRequest()->getUri()->getPath());
         foreach ($headers as $key => $value) {
@@ -58,43 +61,45 @@ class HttpClientTest extends Http_TestCase
     }
 
     /**
-     * @covers \Esat\Http\Clients\HttpClient::setQuery
-     * @covers \Esat\Http\Clients\HttpClient::setBody
-     * @covers \Esat\Http\Clients\HttpClient::setFormParameters
-     * @covers \Esat\Http\Clients\HttpClient::setJson
-     * @covers \Esat\Http\Clients\HttpClient::buildOptions
-     *
-     * @throws InvalidArgumentException
+     * @covers \Esat\Http\Clients\HttpClient::send
      */
-    public function testBuildOptions()
+    public function testSend()
     {
-        $this->client->setQuery('test_query');
-        $this->assertEquals('test_query', $this->client->getCurrentOptions()['query']);
-        $this->assertEquals('test_query', $this->client->getOption('query'));
+        // Mock client
+        /** @var Client|MockObject $guzzle */
+        $guzzle = $this->getMockBuilder(Client::class)
+            ->setMethods(['send'])
+            ->getMock();
+        $this->client->setGuzzleClient($guzzle);
 
-        $this->client->setBody('test_body');
-        $this->assertEquals('test_body', $this->client->getCurrentOptions()['body']);
-        $this->assertEquals('test_body', $this->client->getOption('body'));
+        // Prepare expected parameters and options
+        $parameters = [
+            'name1' => 'value1',
+            'name2' => 'value2',
+        ];
+        $expectedOptions = [
+            'form_params' => $parameters,
+        ];
 
-        $parameters = ['key' => 'value'];
-        $this->client->setFormParameters($parameters);
-        $this->assertEquals($parameters, $this->client->getCurrentOptions()['form_params']);
-        $this->assertEquals($parameters, $this->client->getOption('form_params'));
+        // Mock send
+        $response = new Response();
+        $guzzle->method('send')->willReturn($response);
+        $guzzle
+            ->expects($this->once())
+            ->method('send')
+            /**
+             * with() expects an array as the default argument, according to the docblock, which is not valid.
+             * Instead, we are providing the expected arguments to match all the parameters of the call.
+             * Type hinting might point it out as error according to docblock.
+             */
+            ->with(
+                $this->callback(function (\GuzzleHttp\Psr7\Request $request) {
+                    return $request->getMethod() == SymfonyRequest::METHOD_POST
+                        && $request->getUri() == '/uri';
+                }),
+                $expectedOptions);
 
-        $parameters = ['key' => 'value'];
-        $json = json_encode($parameters);
-        $this->client->setJson($json);
-        $this->assertEquals($json, $this->client->getCurrentOptions()['json']);
-        $this->assertEquals($json, $this->client->getOption('json'));
-
-        // Build mock options
-        $this->client->clearOptions();
-        $this->client->buildOptions('GET', $parameters);
-        $this->assertEquals($parameters, $this->client->getOption('query'));
-
-        // Build mock options
-        $this->client->clearOptions();
-        $this->client->buildOptions('POST', $parameters);
-        $this->assertEquals($parameters, $this->client->getOption('form_params'));
+        // Send request
+        $this->assertEquals($response, $this->client->send(Request::METHOD_POST, '/uri', [], $parameters));
     }
 }
