@@ -187,7 +187,7 @@ abstract class ModelService extends BaseService
      *
      * @return $this
      */
-    public function setModel(BaseModel $model)
+    public function setModel($model)
     {
         $this->model = $model;
 
