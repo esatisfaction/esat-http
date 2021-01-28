@@ -86,12 +86,12 @@ abstract class HttpService extends ModelService
      * @param array  $headers
      * @param array  $parameters
      * @param array  $multipart
+     * @param bool   $clearOptions
      *
      * @return ResponseInterface
      * @throws InvalidArgumentException
-     * @throws Exception
      */
-    public function send($method, $uri, $headers = [], $parameters = [], $multipart = [])
+    public function send($method, $uri, $headers = [], $parameters = [], $multipart = [], $clearOptions = true)
     {
         try {
             // Add domain and version to uri
@@ -107,7 +107,7 @@ abstract class HttpService extends ModelService
             } else {
                 // Log and send request
                 $this->getLogger()->debug(sprintf('%s: %s - %s', $this->getProcessId(), $method, $serviceUri));
-                $response = $this->getHttpClient()->send($method, $serviceUri, $headers, $parameters, $multipart);
+                $response = $this->getHttpClient()->send($method, $serviceUri, $headers, $parameters, $multipart, '1.1', $clearOptions);
             }
 
             // Set last response
