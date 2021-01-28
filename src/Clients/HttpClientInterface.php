@@ -30,12 +30,13 @@ interface HttpClientInterface
      * @param array  $parameters
      * @param array  $multipart
      * @param string $version
+     * @param bool   $clearOptions
      *
      * @return mixed|ResponseInterface
      * @throws ServerException
      * @throws ClientException
      */
-    public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1');
+    public function send($method, $uri, array $headers = [], $parameters = [], $multipart = [], $version = '1.1', $clearOptions = true);
 
     /**
      * @param string $method
