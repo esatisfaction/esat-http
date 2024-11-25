@@ -9,3 +9,4 @@ vendor
 
 # Code coverage reports
 coverage.xml
+.phpunit.cache
