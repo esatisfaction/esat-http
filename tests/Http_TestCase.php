@@ -30,7 +30,7 @@ class Http_TestCase extends Base_TestCase
      * {@inheritdoc}
      * @throws InvalidArgumentException
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

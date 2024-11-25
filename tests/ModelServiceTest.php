@@ -36,7 +36,7 @@ class ModelServiceTest extends Http_TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

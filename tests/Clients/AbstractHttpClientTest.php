@@ -34,7 +34,7 @@ class AbstractHttpClientTest extends Http_TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         /** @var AbstractHttpClient|MockObject $client */
         $this->client = $this->getMockForAbstractClass(AbstractHttpClient::class);

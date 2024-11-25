@@ -41,7 +41,7 @@ class HttpServiceTest extends Base_TestCase
      * @throws InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
