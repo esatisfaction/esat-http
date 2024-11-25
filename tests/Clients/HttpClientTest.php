@@ -68,7 +68,7 @@ class HttpClientTest extends Http_TestCase
         // Mock client
         /** @var Client|MockObject $guzzle */
         $guzzle = $this->getMockBuilder(Client::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
         $this->client->setGuzzleClient($guzzle);
 

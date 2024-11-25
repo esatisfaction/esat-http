@@ -117,7 +117,7 @@ class HttpServiceTest extends Base_TestCase
         // Mock client
         /** @var MockHttpClient|MockObject $client */
         $client = $this->getMockBuilder(MockHttpClient::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
         $this->httpService->setHttpClient($client);
 
@@ -149,7 +149,7 @@ class HttpServiceTest extends Base_TestCase
         // Mock client
         /** @var MockHttpClient|MockObject $client */
         $client = $this->getMockBuilder(MockHttpClient::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
         $this->httpService->setHttpClient($client);
 
@@ -175,7 +175,7 @@ class HttpServiceTest extends Base_TestCase
         // Mock client
         /** @var MockHttpClient|MockObject $client */
         $client = $this->getMockBuilder(MockHttpClient::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
         $this->httpService->setHttpClient($client);
 
@@ -197,7 +197,7 @@ class HttpServiceTest extends Base_TestCase
         // Mock client
         /** @var MockHttpClient|MockObject $client */
         $client = $this->getMockBuilder(MockHttpClient::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
         $this->httpService->setHttpClient($client);
 
@@ -219,7 +219,7 @@ class HttpServiceTest extends Base_TestCase
         // Mock client
         /** @var MockHttpClient|MockObject $client */
         $client = $this->getMockBuilder(MockHttpClient::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
         $this->httpService->setHttpClient($client);
 
