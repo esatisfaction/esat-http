@@ -34,7 +34,7 @@ class AbstractHttpClientTest extends Http_TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         /** @var AbstractHttpClient|MockObject $client */
         $this->client = $this->getMockForAbstractClass(AbstractHttpClient::class);
@@ -103,7 +103,12 @@ class AbstractHttpClientTest extends Http_TestCase
             'name2' => 'value2',
         ];
         $options = $this->client->buildOptions(SymfonyRequest::METHOD_GET, $parameters);
-        $this->assertArraySubset($parameters, $options['query']);
+
+        // Strictly assert, both arrays contain only the keys and values from the $parameters variable
+        $this->assertTrue(
+            empty(array_diff_assoc($parameters, $options['query'])) &&
+            empty(array_diff_assoc($options['query'], $parameters))
+        );
 
         // POST - Parameters
         $parameters = [
@@ -111,7 +116,12 @@ class AbstractHttpClientTest extends Http_TestCase
             'name2' => 'value2',
         ];
         $options = $this->client->buildOptions(SymfonyRequest::METHOD_POST, $parameters);
-        $this->assertArraySubset($parameters, $options['form_params']);
+
+        // Strictly assert, both arrays contain only the keys and values from the $parameters variable
+        $this->assertTrue(
+            empty(array_diff_assoc($parameters, $options['form_params'])) &&
+            empty(array_diff_assoc($options['form_params'], $parameters))
+        );
 
         // POST - Multipart
         $parameters = [
@@ -123,7 +133,10 @@ class AbstractHttpClientTest extends Http_TestCase
             'file2' => 'value2',
         ];
         $options = $this->client->buildOptions(SymfonyRequest::METHOD_POST, $parameters, $multipart);
-        $this->assertArraySubset($multipart, $options['multipart']);
+
+        // Loosely check that $multipart keys and values are contained in the compared array
+        $this->assertTrue(empty(array_diff_assoc($multipart, $options['multipart'])));
+
         $this->assertEquals(array_keys($parameters)[0], $options['multipart'][0]['name']);
         $this->assertEquals($parameters['name1'], $options['multipart'][0]['contents']);
         $this->assertEquals(array_keys($parameters)[1], $options['multipart'][1]['name']);

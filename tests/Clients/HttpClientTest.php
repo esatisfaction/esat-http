@@ -34,7 +34,7 @@ class HttpClientTest extends Http_TestCase
      * {@inheritdoc}
      * @throws InvalidArgumentException
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -68,7 +68,7 @@ class HttpClientTest extends Http_TestCase
         // Mock client
         /** @var Client|MockObject $guzzle */
         $guzzle = $this->getMockBuilder(Client::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
         $this->client->setGuzzleClient($guzzle);
 

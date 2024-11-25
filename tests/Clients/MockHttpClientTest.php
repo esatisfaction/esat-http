@@ -28,7 +28,7 @@ class MockHttpClientTest extends Http_TestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
